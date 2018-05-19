@@ -1,3 +1,4 @@
+import { AuthService } from './../auth.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -5,14 +6,14 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './bs-navbar.component.html',
   styleUrls: ['./bs-navbar.component.css']
 })
-export class BsNavbarComponent implements OnInit {
-  user = {};
+export class BsNavbarComponent {
 
-  constructor() {
-    this.user = { name: "Ahmed" };
+  constructor(private auth: AuthService) {
   }
 
-  ngOnInit() {
+  
+  logout() {
+    this.auth.logout();
   }
 
 }
