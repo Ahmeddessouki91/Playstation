@@ -18,7 +18,6 @@ export class GameFormComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.catogories$ = this.categoryService.getCategories();
-    console.log(this.catogories$);
   }
 
   save(game) {
