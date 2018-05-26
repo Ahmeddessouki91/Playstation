@@ -1,0 +1,18 @@
+<div class="modal-header">
+  <h4 class="modal-title">Limited Timer</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form class="form-inline" #f="ngForm" (ngSubmit)="save(f.value)">
+  <div class="modal-body">
+    <div class="form-group">
+      <label for="name">Time</label>
+      <input id="name"  #name ngModel name="minutes" type="text" class="form-control" placeholder="minutes">
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary">Save</button>
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+  </div>
+</form>

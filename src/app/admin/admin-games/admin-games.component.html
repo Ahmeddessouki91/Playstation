@@ -1,1 +1,26 @@
-<a routerLink="/admin/games/new" class="btn btn-primary">New game</a>
+<p>
+    <button class="btn btn-primary" (click)="open()">New game</button>
+</p>
+
+<p>
+    <input #query type="text" class="form-control" placeholder="Search" (keyup)="filterGames(query.value)">
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Category</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let g of filteredGames">
+            <td>{{g.name}}</td>
+            <td>{{g.category.name }}</td>
+            <td>
+                <a (click)="open(g)">Edit</a>
+            </td>
+        </tr>
+    </tbody>
+</table>

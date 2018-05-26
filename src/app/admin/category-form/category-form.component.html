@@ -1,6 +1,6 @@
 <div class="modal-header">
-  <h4 class="modal-title">Hi there!</h4>
-  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+  <h4 class="modal-title">Category Form</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss()">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
@@ -9,11 +9,38 @@
 
     <div class="form-group">
       <label for="name">Category Name</label>
-      <input id="name" ngModel name="name" type="text" class="form-control">
+      <input id="name" [(ngModel)]="category.name" #name="ngModel" name="name" type="text" class="form-control">
     </div>
+
+    <div class="form-group">
+      <label for="multiPrice">Multi Price /Hour</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">$</span>
+        </div>
+        <input id="multiPrice" #multiPrice="ngModel" [(ngModel)]="category.multiPrice" name="multiPrice" type="number" class="form-control" required>
+      </div>
+      <div class="alert alert-danger" *ngIf="multiPrice.touched && multiPrice.invalid">
+        Multi Price is required.
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="singlePrice">Single Price /Hour</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">$</span>
+        </div>
+        <input id="singlePrice" #singlePrice="ngModel" [(ngModel)]="category.singlePrice" name="singlePrice" type="number" class="form-control" required>
+      </div>
+      <div class="alert alert-danger" *ngIf="singlePrice.touched && singlePrice.invalid">
+        Single Price is required.
+      </div>
+    </div>
+
   </div>
   <div class="modal-footer">
     <button class="btn btn-primary">Save</button>
-    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close()">Close</button>
   </div>
 </form>

@@ -1,3 +1,24 @@
+<p>
+    <button class="btn btn-primary" (click)="open()">New Category</button>
+</p>
+<p>
+    <input #query type="text" class="form-control" placeholder="Search" (keyup)="filterCategories(query.value)">
+</p>
 
-
-<button class="btn btn-primary" (click)="open()">New Category</button>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let g of filteredCategories">
+            <td>{{g.name}}</td>
+            <td>
+                <a (click)="open(g)">Edit</a> |
+                <a>Delete</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
