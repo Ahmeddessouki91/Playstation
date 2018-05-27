@@ -19,9 +19,7 @@ export class AdminCategoriesComponent implements OnInit {
   constructor(private modalService: NgbModal, private categoryService: CategoryService) { }
 
   ngOnInit() {
-    this.subscription = this.categoryService.GetAll().subscribe((c: Cateogry[]) => {
-      this.filteredCategories = this.categories = c;
-    });
+    this.getCategories();
   }
 
   filterCategories(query: string) {
@@ -30,12 +28,18 @@ export class AdminCategoriesComponent implements OnInit {
       this.categories;
   }
 
+  getCategories() {
+    this.subscription = this.categoryService.GetAll().subscribe((c: Cateogry[]) => {
+      this.filteredCategories = this.categories = c;
+    });
+  }
+
   open(category) {
     const modalRef = this.modalService.open(CategoryFormComponent);
     modalRef.componentInstance.categoryEntity = category;
     modalRef.result.then(res => {
       if (!res) return;
-      this.categories.push(res);
+      this.getCategories();
     });
   }
   ngOnDestroy(): void {

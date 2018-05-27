@@ -1,0 +1,36 @@
+<p>
+    <button class="btn btn-primary" (click)="open()">New Ticket</button>
+</p>
+
+<p>
+    <input #query type="text" class="form-control" placeholder="Search" (keyup)="filterTimes(query.value)">
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Game</th>
+            <th>Type</th>
+            <th>Category</th>
+            <th>Time Type</th>
+            <th>Start Time</th>
+            <th>Used Time</th>
+            <th>End Time</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let t of filterdTimes">
+            <td>{{t.game.name}}</td>
+            <td>{{t.isMulti?"Mutli":"Single"}}</td>
+            <td>{{t.game.category.name }}</td>
+            <td>{{t.isLimited?"Limited":"Unlimited"}}</td>
+            <td>{{t.startTime | date:"dd-MM-yyyy HH:mm"}}</td>
+            <td>{{usedTime(t.startTime)}}</td>
+            <td>{{t.endTime ? t.endTime:""}}</td>
+            <td>
+                <a (click)="open(t)">Edit</a>
+            </td>
+        </tr>
+    </tbody>
+</table>

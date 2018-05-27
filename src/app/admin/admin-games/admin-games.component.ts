@@ -21,9 +21,7 @@ export class AdminGamesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.subscription = this.gameService.GetAll().subscribe((g: Game[]) => {
-      this.filteredGames = this.games = g;
-    });
+    this.getGames();
   }
 
   filterGames(query: string) {
@@ -36,10 +34,15 @@ export class AdminGamesComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.gameEntity = game;
     modalRef.result.then(res => {
       if (!res) return;
-      this.games.push(res);
+      this.getGames();
     });
   }
 
+  getGames() {
+    this.subscription = this.gameService.GetAll().subscribe((g: Game[]) => {
+      this.filteredGames = this.games = g;
+    });
+  }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

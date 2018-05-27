@@ -22,6 +22,7 @@ import { TokenInterceptor } from './services/token-interceptor.service';
 import { CategoryFormComponent } from './admin/category-form/category-form.component';
 import { TimerComponent } from './timer/timer.component';
 import { LimitTimeComponent } from './popups/limit-time/limit-time.component';
+import { TimeFormComponent } from './time-form/time-form.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { LimitTimeComponent } from './popups/limit-time/limit-time.component';
     GameFormComponent,
     CategoryFormComponent,
     TimerComponent,
-    LimitTimeComponent
+    LimitTimeComponent,
+    TimeFormComponent
   ],
   imports: [
     BrowserModule,
