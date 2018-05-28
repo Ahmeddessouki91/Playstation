@@ -1,3 +1,4 @@
+import { getTestBed } from '@angular/core/testing';
 import { Cateogry } from './../models/Category';
 import { ActivatedRoute } from '@angular/router';
 import { CategoryService } from './../services/app-services/category.service';
@@ -26,6 +27,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(private timeService: TimeService, public modalService: NgbModal) { }
 
   ngOnInit() {
+    setInterval(() => {
+      this.filterTimes("");
+    }, 1000 * 60)
     this.getTimes();
   }
 
@@ -34,13 +38,15 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.filterdTimes = this.times = t;
     });
   }
+
   filterTimes(query: string) {
     this.filterdTimes = (query) ?
       this.times.filter((t: Time) => t.game.name.toLowerCase().includes(query.toLowerCase())) :
       this.times;
   }
+
   open(time) {
-    const modalRef = this.modalService.open(TimeFormComponent);
+    const modalRef = this.modalService.open(TimeFormComponent, { size: 'lg' });
     modalRef.componentInstance.timeEntity = time;
     modalRef.result.then(res => {
       if (!res) return;
@@ -48,11 +54,28 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
   }
 
-  usedTime(startTime: Date) {
-    let currentDate = new Date().getTime();
-    let deff = currentDate - startTime.getTime();
-    return Math.floor(deff / 1000 / 60 / 60 / 60);
+  usedTime(time: string) {
+
+    let currentTime = new Date();
+    let startTime = new Date(Date.parse(time));
+
+    let diffTime = this.diff_hours(currentTime, startTime);
+
+
+    let hours = Math.round((diffTime / 60));
+    let minutes = Math.round(((diffTime / 60) % 1) * 60);
+    
+    let deff = Math.abs(currentTime.getTime() - startTime.getTime());
+
+    return ((hours < 9) ? ("0" + hours) : hours) + ":" + ((minutes < 9) ? ("0" + minutes) : minutes); // minutes
   }
+
+  diff_hours(dt2: any, dt1: any) {
+    let diff = (dt2.getTime() - dt1.getTime()) / 1000;
+    return diff /= 60;
+  }
+
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }

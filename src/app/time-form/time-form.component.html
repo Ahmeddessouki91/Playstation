@@ -1,3 +1,72 @@
-<p>
-  time-form works!
-</p>
+<div class="modal-header">
+  <h4 class="modal-title">Ticket Form</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<form #f="ngForm" (ngSubmit)="save(f.value)">
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="category">Category</label>
+          <select id="category" name="category" #category="ngModel" [(ngModel)]="time.category" (change)="changeCategory(category.value)"
+            type="text" class="form-control" required>
+            <option value=""></option>
+            <option *ngFor="let c of catogories$|async" [value]="c._id">{{c.name}}</option>
+          </select>
+          <small class="alert-danger" *ngIf="category.touched && category.invalid">Category is Requird.</small>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="game">Game</label>
+          <select id="game" name="game" #game="ngModel" [(ngModel)]="time.game" type="text" class="form-control"
+            required>
+            <option *ngFor="let c of filteredGames" [value]="c._id">{{c.name}}</option>
+          </select>
+          <small class="alert-danger" *ngIf="game.touched && game.invalid">Game is Requird.</small>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Game Type</label>
+          <div class="form-check">
+            <input type="radio" name="isMulti" #isMulti="ngModel" [(ngModel)]="time.isMulti" class="form-check-input" [value]="false"
+              id="multi">
+            <label class="form-check-label" for="multi">
+              Single
+            </label>
+          </div>
+          <div class="form-check">
+            <input type="radio" name="isMulti" id="single" #isMulti="ngModel" [(ngModel)]="time.isMulti" class="form-check-input" [value]="true">
+            <label class="form-check-label" for="single">
+              Multi
+            </label>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="limitedTime">Limited Time per mintues</label>
+          <input type="number" #limitedTime="ngModel" [(ngModel)]="time.limitedTime" name="limitedTime" id="limitedTime" class="form-control">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary" [disabled]="!f.valid">Save</button>
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close()">Close</button>
+  </div>
+</form>
+
+<!-- 
+<swal #deleteSwal title="Are you sure to delete {{ game.name }} ?" text="This cannot be undone" type="question" [showCancelButton]="true"
+  [confirmButtonText]="'Confirm'" [focusCancel]="true" (confirm)="delete()">
+</swal> -->

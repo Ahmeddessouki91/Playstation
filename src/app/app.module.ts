@@ -64,6 +64,6 @@ import { TimeFormComponent } from './time-form/time-form.component';
     AuthService, AuthGuard, CategoryService, GameService,
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }],
   bootstrap: [AppComponent],
-  entryComponents: [CategoryFormComponent,LimitTimeComponent,GameFormComponent]
+  entryComponents: [CategoryFormComponent, LimitTimeComponent, GameFormComponent, TimeFormComponent]
 })
 export class AppModule { }

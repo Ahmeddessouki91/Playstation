@@ -39,7 +39,7 @@ export class AdminGamesComponent implements OnInit, OnDestroy {
   }
 
   getGames() {
-    this.subscription = this.gameService.GetAll().subscribe((g: Game[]) => {
+    this.subscription = this.gameService.GetAll("").subscribe((g: Game[]) => {
       this.filteredGames = this.games = g;
     });
   }

@@ -14,8 +14,8 @@ export class GameService {
     return this.http.post(this.url, game);
   }
 
-  GetAll() {
-    return this.http.get(this.url);
+  GetAll(query) {
+    return this.http.get(this.url + "?category=" + query);
   }
 
   Get(gameId) {
