@@ -21,7 +21,7 @@ export class TokenInterceptor implements HttpInterceptor {
 
     return next.handle(req).pipe(tap((event: HttpEvent<any>) => {
       if (event instanceof HttpResponse) {
-        console.log(event);
+        return event;
       }
     }, (err: any) => {
       if (err instanceof HttpErrorResponse) {

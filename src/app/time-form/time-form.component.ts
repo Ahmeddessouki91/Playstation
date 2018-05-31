@@ -17,7 +17,7 @@ export class TimeFormComponent implements OnInit, OnDestroy {
   filteredGames: any;
   catogories$;
   games;
-  time: any = {
+  timeObj: any = {
     isMulti: false
   };
   subscribtion: Subscription;
@@ -27,10 +27,14 @@ export class TimeFormComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.catogories$ = this.categoryService.GetAll();
-    this.subscribtion = this.gameService.GetAll("").subscribe(res => {
-      this.games = res;
+    this.subscribtion = this.gameService.GetAll("").subscribe((res: any[]) => {
+      this.games = res.filter(q => q.avaliable == true);
+      if (this.timeEntity) {
+        this.timeObj = this.timeEntity
+        this.timeObj.category = this.timeEntity.game.category._id
+        this.timeObj.game = this.timeEntity.game._id;
+      };
     });
-    if (this.timeEntity) this.time = this.timeEntity;
   }
 
   changeCategory(category) {
@@ -38,11 +42,15 @@ export class TimeFormComponent implements OnInit, OnDestroy {
   }
 
   save(time) {
-    time.isLimited = time.limitedTime > 0 ? true : false;
+    if (time.limitedTime > 0) {
+      time.isLimited = true;
+    }
+    time.game = { _id: time.game, avaliable: false };
     this.subscribtion = this.timeService.create(time).subscribe(res => {
       this.activeModal.close(res);
     });
   }
+
 
 
   ngOnDestroy(): void {

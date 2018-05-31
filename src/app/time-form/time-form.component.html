@@ -11,7 +11,7 @@
       <div class="col-md-6">
         <div class="form-group">
           <label for="category">Category</label>
-          <select id="category" name="category" #category="ngModel" [(ngModel)]="time.category" (change)="changeCategory(category.value)"
+          <select id="category" name="category" #category="ngModel" [(ngModel)]="timeObj.category" (change)="changeCategory(category.value)"
             type="text" class="form-control" required>
             <option value=""></option>
             <option *ngFor="let c of catogories$|async" [value]="c._id">{{c.name}}</option>
@@ -22,7 +22,7 @@
       <div class="col-md-6">
         <div class="form-group">
           <label for="game">Game</label>
-          <select id="game" name="game" #game="ngModel" [(ngModel)]="time.game" type="text" class="form-control"
+          <select id="game" name="game" #game="ngModel" [(ngModel)]="timeObj.game" type="text" class="form-control"
             required>
             <option *ngFor="let c of filteredGames" [value]="c._id">{{c.name}}</option>
           </select>
@@ -37,14 +37,14 @@
         <div class="form-group">
           <label>Game Type</label>
           <div class="form-check">
-            <input type="radio" name="isMulti" #isMulti="ngModel" [(ngModel)]="time.isMulti" class="form-check-input" [value]="false"
+            <input type="radio" name="isMulti" #isMulti="ngModel" [(ngModel)]="timeObj.isMulti" class="form-check-input" [value]="false"
               id="multi">
             <label class="form-check-label" for="multi">
               Single
             </label>
           </div>
           <div class="form-check">
-            <input type="radio" name="isMulti" id="single" #isMulti="ngModel" [(ngModel)]="time.isMulti" class="form-check-input" [value]="true">
+            <input type="radio" name="isMulti" id="single" #isMulti="ngModel" [(ngModel)]="timeObj.isMulti" class="form-check-input" [value]="true">
             <label class="form-check-label" for="single">
               Multi
             </label>
@@ -55,7 +55,7 @@
       <div class="col-md-6">
         <div class="form-group">
           <label for="limitedTime">Limited Time per mintues</label>
-          <input type="number" #limitedTime="ngModel" [(ngModel)]="time.limitedTime" name="limitedTime" id="limitedTime" class="form-control">
+          <input type="number" #limitedTime="ngModel" [(ngModel)]="timeObj.limitedTime" name="limitedTime" id="limitedTime" class="form-control">
         </div>
       </div>
     </div>

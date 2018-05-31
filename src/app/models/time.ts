@@ -6,7 +6,9 @@ export interface Time {
     isLimited: Boolean,
     isMulti: Boolean,
     startTime: Date,
-    endTime: Date,
     isCheckout: Boolean,
-    limitedTime:Number
+    usedTime: Number,
+    limitedTime: Number,
+    isPause: Boolean,
+    isFinish: Boolean
 }

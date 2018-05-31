@@ -7,7 +7,7 @@
 </p>
 
 <table class="table">
-    <thead>
+    <thead class="text-center">
         <tr>
             <th>Game</th>
             <th>Type</th>
@@ -15,21 +15,37 @@
             <th>Time Type</th>
             <th>Start Time</th>
             <th>Used Time</th>
-            <th>End Time</th>
-            <th></th>
+            <th>Reserved Time</th>
+            <th>Status</th>
+            <th>Actions</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody class="text-center">
         <tr *ngFor="let t of filterdTimes">
             <td>{{t.game.name}}</td>
             <td>{{t.isMulti?"Mutli":"Single"}}</td>
             <td>{{t.game.category.name }}</td>
             <td>{{t.isLimited?"Limited":"Unlimited"}}</td>
-            <td>{{t.startTime | date:"dd-MM-yyyy HH:mm"}}</td>
-            <td>{{usedTime(t.startTime)}}</td>
-            <td>{{t.endTime ? t.endTime:""}}</td>
+            <td>{{t.startTime | date:"HH:mm"}}</td>
+            <td>{{usedTime(t)}}</td>
+            <td>{{timeService.formatTime(t.limitedTime)}}</td>
             <td>
-                <a (click)="open(t)">Edit</a>
+                <i *ngIf="t.isFinish" style="font-size: 20px;color: green" class="fa fa-check" aria-hidden="true"></i>
+                <i *ngIf="!t.isFinish" style="font-size: 20px;color: red" class="fa fa-times" aria-hidden="true"></i>
+            </td>
+            <td>
+                <a class="actionBtns" *ngIf="!t.isFinish" href="javascript:;" (click)="open(t)">
+                    <i class="fa fa-pause fa-1x"></i>
+                </a>
+                |
+                <a class="actionBtns" href="javascript:;" (click)="open(t)">
+                    <i class="fa fa-money fa-1x" aria-hidden="true"></i>
+                </a>
+                |
+                <a class="actionBtns" href="javascript:;" (click)="open(t)">
+                    <i class="fa fa-clock-o fa-1x" aria-hidden="true"></i>
+                </a>
+                |
             </td>
         </tr>
     </tbody>

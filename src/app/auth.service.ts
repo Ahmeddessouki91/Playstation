@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Observable } from 'rxjs';
-import { map, switchMap } from "rxjs/operators";
+import { map, switchMap, catchError } from "rxjs/operators";
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   private url: string = 'http://localhost:3000';
-  public redirectUrl: string;
   public username: string;
 
   constructor(private http: Http, private router: Router) {
@@ -44,5 +43,4 @@ export class AuthService {
   get token() {
     return localStorage.getItem('token');
   }
-
 }

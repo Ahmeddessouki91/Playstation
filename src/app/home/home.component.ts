@@ -54,26 +54,28 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
   }
 
-  usedTime(time: string) {
+  usedTime(time: Time) {
 
     let currentTime = new Date();
-    let startTime = new Date(Date.parse(time));
+    let startTime = new Date(Date.parse(time.startTime.toString()));
 
-    let diffTime = this.diff_hours(currentTime, startTime);
+    let diffTime = time.usedTime.valueOf() + this.timeService.diff_min(currentTime, startTime);
 
-
-    let hours = Math.round((diffTime / 60));
-    let minutes = Math.round(((diffTime / 60) % 1) * 60);
-    
-    let deff = Math.abs(currentTime.getTime() - startTime.getTime());
-
-    return ((hours < 9) ? ("0" + hours) : hours) + ":" + ((minutes < 9) ? ("0" + minutes) : minutes); // minutes
+    if (time.isPause || time.isFinish)
+      return this.timeService.formatTime(time.usedTime.valueOf());
+    if (time.isLimited && !time.isFinish && diffTime >= time.limitedTime) {
+      time.usedTime = time.limitedTime;
+      time.isFinish = true;
+      time.game.avaliable = true;
+      this.subscription = this.timeService.update(time._id, time).subscribe(res => {
+        this.getTimes()
+        console.log("time Finished");
+        return this.timeService.formatTime(time.usedTime.valueOf());
+      });
+    }
+    return this.timeService.formatTime(diffTime);
   }
 
-  diff_hours(dt2: any, dt1: any) {
-    let diff = (dt2.getTime() - dt1.getTime()) / 1000;
-    return diff /= 60;
-  }
 
 
   ngOnDestroy(): void {
