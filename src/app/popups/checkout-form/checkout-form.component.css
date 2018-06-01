@@ -1,0 +1,45 @@
+.box {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-panel {
+  padding-bottom: 0px;
+}
+
+#crickets {
+  width: 100px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+
+.bold {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.logo img {
+    position: relative;
+    top: 0px;
+    left: 290px;
+    width: 60px;
+    filter: invert(1);
+    -moz-filter: invert(1);
+    -webkit-filter: invert(1);
+  }
+  
+  .checkout {
+    margin: 0px;
+  }
+  
+  .btn-large {
+    margin: 10px 0%;
+    /*   width: 100%; */
+  }
+  
+  .help {
+    text-align: center;
+  }

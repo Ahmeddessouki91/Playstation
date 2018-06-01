@@ -1,0 +1,53 @@
+<div class="modal-header">
+  <h4 class="modal-title">Checkout summary</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form (ngSubmit)="save()">
+  <div class="modal-body">
+    <div class="merchant text-center">
+      <img id="crickets" src="http://ishtyaqhabib.com/assets/images/forcodepen/cricketsCafe.png">
+      <h5 class="">Crickets Café</h5>
+      <p>{{TodayDate|date:'dd-MM-yyy HH:MM'}}</p>
+    </div>
+    <div class="invoice">
+      <table class="table table-hover">
+        <thead class="thead-dark">
+          <tr>
+            <th>Game</th>
+            <th>Category</th>
+            <th>Type</th>
+            <th>Used time</th>
+            <th>Reserved time</th>
+            <th class="text-right">PRICE</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{timeObj.game.name}}</td>
+            <td>{{timeObj.game.category.name}}</td>
+            <td>{{timeObj.isLimited?"Limited":"Unlimited"}}</td>
+            <td>{{timeService.formatTime(usedTime)}}</td>
+            <td>{{timeService.formatTime(timeObj.limitedTime)}}</td>
+            <td class="text-right">{{totalPrice|currency:'USD':'symbol'}}</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="text-right bold">Total</td>
+            <td class="text-right bold">{{totalPrice|currency:'USD':'symbol'}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-success">Checkout
+      <i class="fa fa-check"></i>
+    </button>
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close()">Close</button>
+  </div>
+</form>

@@ -14,8 +14,8 @@ export class TimeService {
     return this.http.post(this.url, time);
   }
 
-  GetAll() {
-    return this.http.get(this.url);
+  GetAll(query) {
+    return this.http.get(this.url + "?filter=" + query);
   }
 
   Get(timeId) {
@@ -34,11 +34,11 @@ export class TimeService {
     let hours = Math.round((diffTime / 60));
     let minutes = Math.round(((diffTime / 60) % 1) * 60);
 
-    return ((hours < 9) ? ("0" + hours) : hours) + ":" + ((minutes < 9) ? ("0" + minutes) : minutes); // minutes
+    return ((hours <= 9) ? ("0" + hours) : hours) + ":" + ((minutes <= 9) ? ("0" + minutes) : minutes); // minutes
   }
-  
+
   diff_min(dt2: any, dt1: any) {
     let diff = (dt2.getTime() - dt1.getTime()) / 1000;
-    return diff /= 60;
+    return Math.round(diff /= 60);
   }
 }

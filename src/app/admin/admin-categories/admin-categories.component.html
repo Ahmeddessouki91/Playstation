@@ -9,15 +9,19 @@
     <thead>
         <tr>
             <th>Name</th>
-            <th></th>
+            <th>Single</th>
+            <th>Multi</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let g of filteredCategories">
             <td>{{g.name}}</td>
+            <td>{{g.singlePrice|currency:'USD':'symbol'}}</td>
+            <td>{{g.multiPrice|currency:'USD':'symbol'}}</td>
             <td>
-                <a (click)="open(g)">Edit</a> |
-                <a>Delete</a>
+                <a href="javascript:;" (click)="open(g)"><i class="fa fa-pencil" aria-hidden="true"></i></a> |
+                <a href="javascript:;"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
             </td>
         </tr>
     </tbody>

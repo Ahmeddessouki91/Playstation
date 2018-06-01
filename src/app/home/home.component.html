@@ -13,7 +13,6 @@
             <th>Type</th>
             <th>Category</th>
             <th>Time Type</th>
-            <th>Start Time</th>
             <th>Used Time</th>
             <th>Reserved Time</th>
             <th>Status</th>
@@ -26,7 +25,6 @@
             <td>{{t.isMulti?"Mutli":"Single"}}</td>
             <td>{{t.game.category.name }}</td>
             <td>{{t.isLimited?"Limited":"Unlimited"}}</td>
-            <td>{{t.startTime | date:"HH:mm"}}</td>
             <td>{{usedTime(t)}}</td>
             <td>{{timeService.formatTime(t.limitedTime)}}</td>
             <td>
@@ -34,18 +32,16 @@
                 <i *ngIf="!t.isFinish" style="font-size: 20px;color: red" class="fa fa-times" aria-hidden="true"></i>
             </td>
             <td>
-                <a class="actionBtns" *ngIf="!t.isFinish" href="javascript:;" (click)="open(t)">
+                <a class="actionBtns" *ngIf="!t.isFinish" href="javascript:;" (click)="pauseTime(t)" ngbTooltip="Pause">
                     <i class="fa fa-pause fa-1x"></i>
                 </a>
-                |
-                <a class="actionBtns" href="javascript:;" (click)="open(t)">
+                <a class="actionBtns" href="javascript:;" (click)="openCheckout(t)" ngbTooltip="Checkout">
                     <i class="fa fa-money fa-1x" aria-hidden="true"></i>
                 </a>
-                |
-                <a class="actionBtns" href="javascript:;" (click)="open(t)">
+                <a class="actionBtns" *ngIf="t.isLimited" href="javascript:;" (click)="openAddTime(t)" ngbTooltip="Add time">
                     <i class="fa fa-clock-o fa-1x" aria-hidden="true"></i>
                 </a>
-                |
+
             </td>
         </tr>
     </tbody>

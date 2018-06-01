@@ -42,10 +42,13 @@ export class TimeFormComponent implements OnInit, OnDestroy {
   }
 
   save(time) {
-    if (time.limitedTime > 0) {
+    if (time.limitedTime)
       time.isLimited = true;
-    }
+    else
+      time.isLimited = false;
+
     time.game = { _id: time.game, avaliable: false };
+    
     this.subscribtion = this.timeService.create(time).subscribe(res => {
       this.activeModal.close(res);
     });

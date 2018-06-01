@@ -23,6 +23,7 @@ import { CategoryFormComponent } from './admin/category-form/category-form.compo
 import { TimerComponent } from './timer/timer.component';
 import { LimitTimeComponent } from './popups/limit-time/limit-time.component';
 import { TimeFormComponent } from './time-form/time-form.component';
+import { CheckoutFormComponent } from './popups/checkout-form/checkout-form.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { TimeFormComponent } from './time-form/time-form.component';
     CategoryFormComponent,
     TimerComponent,
     LimitTimeComponent,
-    TimeFormComponent
+    TimeFormComponent,
+    CheckoutFormComponent
   ],
   imports: [
     BrowserModule,
@@ -64,6 +66,6 @@ import { TimeFormComponent } from './time-form/time-form.component';
     AuthService, AuthGuard, CategoryService, GameService,
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }],
   bootstrap: [AppComponent],
-  entryComponents: [CategoryFormComponent, LimitTimeComponent, GameFormComponent, TimeFormComponent]
+  entryComponents: [CategoryFormComponent, LimitTimeComponent, GameFormComponent, TimeFormComponent, CheckoutFormComponent]
 })
 export class AppModule { }

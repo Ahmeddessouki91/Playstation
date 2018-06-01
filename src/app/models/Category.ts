@@ -1,6 +1,6 @@
 export interface Cateogry {
-    _id: string,
-    name: string,
-    multiPrice: number,
-    singlePrice: number
+    _id: String,
+    name: String,
+    multiPrice: Number,
+    singlePrice: Number
 }
